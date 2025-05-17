@@ -16,7 +16,6 @@ class UserAdmin(BaseUserAdmin):
 
 from rest_framework_simplejwt.token_blacklist.models import OutstandingToken, BlacklistedToken
 
-# Клас кастомних токенів для аdmin
 class MyOutstandingTokenAdmin(admin.ModelAdmin):
     list_display = ('user', 'jti', 'created_at', 'expires_at')
     search_fields = ('user__username', 'jti')

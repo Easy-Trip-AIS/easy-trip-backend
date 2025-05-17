@@ -25,8 +25,26 @@ class LoginSerializer(TokenObtainPairSerializer):
         # якщо фронт шле {'login':..., 'password':...}, то раніше у view ми їх перейменуємо
         return super().validate(attrs)
 
-# ------------------------------------------------------------------------------------------------------------
+class LogoutSerializer(serializers.Serializer):
+    refresh = serializers.CharField(
+        help_text="Refresh-токен, який потрібно заблокувати"
+    )
 
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        # перелік полів, які хочете бачити у профілі
+        fields = (
+            'username',        # login
+            'email',
+            'first_name',      # name
+            'last_name',       # surname
+            'date_of_birth',
+            'date_joined',
+        )
+        read_only_fields = fields
+
+# ------------------------------------------------------------------------------------------------------------
 
 class LocationSerializer(serializers.Serializer):
     lat = serializers.FloatField(help_text="Широта")
